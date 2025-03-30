@@ -3,6 +3,8 @@ import logging
 from typing import List
 
 logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 
 class Book:
     def __init__(self, title: str, author: str, year: int) -> None:
@@ -40,10 +42,10 @@ class Library(LibraryInterface):
 
     def show_books(self) -> None:
         if not self.books:
-            print(f'Library is empty.')
+            logger.info("Library is empty.")
         else:
             for book in self.books:
-                print(book)
+                logger.info(book)
 
 
 class LibraryStorage:
@@ -53,11 +55,11 @@ class LibraryStorage:
     def add_book(self, title: str, author: str, year: int) -> None:
         book = Book(title, author, year)
         self.library.add_book(book)
-        print(f'Book with name "{title}" was added successfully')
+        logger.info(f'Book with name {title} was added successfully')
 
     def remove_book(self, title: str) -> None:
         self.library.remove_book(title)
-        print(f'Book with name "{title}" was removed successfully')
+        logger.info(f'Book with name {title} was removed successfully')
 
     def show_books(self) -> None:
         self.library.show_books()
@@ -83,7 +85,7 @@ def main() -> None:
         elif command == "exit":
             break
         else:
-            print(f'Invalid command. Please try again.')
+            logger.info("Invalid command. Please try again.")
 
 
 if __name__ == "__main__":
